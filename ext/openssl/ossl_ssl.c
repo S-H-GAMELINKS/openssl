@@ -1869,8 +1869,8 @@ ossl_ssl_read_internal(int argc, VALUE *argv, VALUE self, int nonblock)
 		goto end;
 	    case SSL_ERROR_ZERO_RETURN:
 		if (no_exception_p(opts)) { return Qnil; }
-		rb_eof_error();
-	    case SSL_ERROR_WANT_WRITE:
+        ossl_raise(eSSLError, "SSL_read");
+        case SSL_ERROR_WANT_WRITE:
 		if (no_exception_p(opts)) { return sym_wait_writable; }
                 write_would_block(nonblock);
                 rb_io_wait_writable(fptr->fd);
