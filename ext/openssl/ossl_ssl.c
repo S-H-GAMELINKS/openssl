@@ -1893,8 +1893,8 @@ ossl_ssl_read_internal(int argc, VALUE *argv, VALUE self, int nonblock)
 			 * EOF for now...
 			 */
 			if (no_exception_p(opts)) { return Qnil; }
-			rb_eof_error();
-		    }
+            ossl_raise(eSSLError, "SSL_read");
+            }
 		}
                 /* fall through */
 	    default:
